@@ -13,6 +13,8 @@ public final class Constants {
         public static final String BALANCE = "balance";
 
         public static final String ERRORS = "errors";
+
+        public static final String RESPONSE = "response";
     }
 
     public static final class Templates {

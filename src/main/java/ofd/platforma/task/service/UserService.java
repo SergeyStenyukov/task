@@ -5,12 +5,12 @@ import ofd.platforma.task.dao.UserDao;
 import ofd.platforma.task.domain.Balance;
 import ofd.platforma.task.domain.User;
 import ofd.platforma.task.domain.enums.BalanceType;
+import ofd.platforma.task.domain.enums.ResponseCode;
 import ofd.platforma.task.exceptions.UserExistsException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,12 +28,11 @@ public class UserService {
 
     @Transactional
     public User save(User user) {
-        boolean isLoginExists = userDao.isUserWithLoginExists(user.getLogin());
-        if (!isLoginExists) {
+        if (!userDao.isUserWithLoginExists(user.getLogin())) {
             User savedUser = userDao.save(user);
             createDefaultBalanceAndSetToUser(savedUser);
             return savedUser;
-        } else throw new UserExistsException("User with login " + user.getLogin() + " already exists");
+        } else throw new UserExistsException("User with login " + user.getLogin() + " already exists", ResponseCode.USER_ALREADY_EXISTS.getValue());
     }
 
     public User findById(int id) {
@@ -57,7 +56,7 @@ public class UserService {
     private void createDefaultBalanceAndSetToUser(User user) {
         Balance balance = new Balance();
         balance.setType(BalanceType.FREE);
-        balance.setAmount(new BigDecimal(0));
+        balance.setAmount(0L);
         balance.setUserId(user.getId());
         Balance savedBalance = balanceDao.save(balance);
         user.setBalances(Collections.singletonList(savedBalance));

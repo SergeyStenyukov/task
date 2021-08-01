@@ -1,12 +1,8 @@
 package ofd.platforma.task.exceptions;
 
-public class UserExistsException extends RuntimeException {
+public class UserExistsException extends AbstractDaoException {
 
-    public UserExistsException(String message) {
-        super(message);
-    }
-
-    public UserExistsException(String message, Throwable cause) {
-        super(message, cause);
+    public UserExistsException(String message, int responseCode) {
+        super(message, responseCode);
     }
 }

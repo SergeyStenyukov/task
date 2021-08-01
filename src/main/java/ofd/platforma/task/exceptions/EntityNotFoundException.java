@@ -1,12 +1,8 @@
 package ofd.platforma.task.exceptions;
 
-public class EntityNotFoundException extends RuntimeException {
+public class EntityNotFoundException extends AbstractDaoException {
 
-    public EntityNotFoundException(String message) {
-        super(message);
-    }
-
-    public EntityNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+    public EntityNotFoundException(String message, int responseCode) {
+        super(message, responseCode);
     }
 }

@@ -2,14 +2,13 @@ package ofd.platforma.task.domain;
 
 import ofd.platforma.task.domain.enums.BalanceType;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Balance {
 
     private int id;
 
-    private BigDecimal amount;
+    private Long amount;
 
     private BalanceType type;
 
@@ -20,7 +19,7 @@ public class Balance {
     public Balance() {
     }
 
-    public Balance(int id, BigDecimal amount,
+    public Balance(int id, Long amount,
                    BalanceType type, LocalDateTime localDateTime, int user_id) {
         this.id = id;
         this.amount = amount;
@@ -37,11 +36,11 @@ public class Balance {
         this.id = id;
     }
 
-    public BigDecimal getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 

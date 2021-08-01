@@ -3,6 +3,7 @@ package ofd.platforma.task.dao.impl;
 import ofd.platforma.task.dao.UserDao;
 import ofd.platforma.task.dao.mapper.UserMapper;
 import ofd.platforma.task.domain.User;
+import ofd.platforma.task.domain.enums.ResponseCode;
 import ofd.platforma.task.exceptions.EntityNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,7 +56,7 @@ public class UserDaoImpl implements UserDao {
         try {
             return jdbcTemplate.queryForObject(SELECT_USER_SQL, userMapper, id);
         } catch (EmptyResultDataAccessException e) {
-            throw new EntityNotFoundException("Cannot find user with id " + id);
+            throw new EntityNotFoundException("Cannot find user with id " + id, ResponseCode.USER_DOESNT_EXIST.getValue());
         }
     }
 
@@ -75,7 +76,7 @@ public class UserDaoImpl implements UserDao {
         try {
             return jdbcTemplate.queryForObject(SELECT_USER_BY_LOGIN_SQL, userMapper, login);
         } catch (EmptyResultDataAccessException e) {
-            throw new EntityNotFoundException("Cannot find user with login " + login);
+            throw new EntityNotFoundException("Cannot find user with login " + login, ResponseCode.USER_DOESNT_EXIST.getValue());
         }
     }
 }

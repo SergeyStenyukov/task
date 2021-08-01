@@ -17,7 +17,7 @@ public class BalanceMapper implements RowMapper<Balance> {
         Balance balance = new Balance();
         balance.setId(resultSet.getInt("id"));
         balance.setType(BalanceType.valueOf(resultSet.getString("type")));
-        balance.setAmount(resultSet.getBigDecimal("amount"));
+        balance.setAmount(resultSet.getLong("amount"));
         balance.setUserId(resultSet.getInt("user_id"));
         balance.setLocalDateTime(resultSet.getObject("created_date", LocalDateTime.class));
         return balance;
